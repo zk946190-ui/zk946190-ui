@@ -25,11 +25,10 @@ I build hardware that works, and the software that runs, secures and analyses it
 - [Skin Cancer Detection using CNN](https://github.com/zk946190-ui/skin-cancer-detection-cnn) – improved a CNN from 45.5% to 83.3% test accuracy using EfficientNetB7 transfer learning
 
 ## 🎓 Experience and training
-- Cybersecurity intern, GTTC Hubli (16 weeks, 2025-2026)
+- Cybersecurity intern, GTTC Hubli (February to May 2026)
 - PCB design training in KiCad
 - Cisco learning certificates in Cybersecurity and Ethical Hacking
 
 ## 📫 Connect with me
-- 🌐 Portfolio: [zk946190-ui.github.io](https://zk946190-ui.github.io)
 - 💼 LinkedIn: [Bibi Zainab](https://www.linkedin.com/in/bibi-zainab-dhalayat-929b2b41a)
 - ✉️ Email: zk946190@gmail.com
