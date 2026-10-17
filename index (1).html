@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bibi Zainab | PCB Design, Embedded Systems, ECE Graduate</title>
+<meta name="description" content="Portfolio of Bibi Zainab, an ECE graduate who designs PCBs in KiCad, builds Arduino-based embedded systems and writes Python tools for machine learning and cybersecurity.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
+<style>
+:root{
+  --board:#0d3a2e; --panel:#0a2d24; --silk:#f2f0e6; --silk-dim:#b9c9c0;
+  --copper:#e0a26a; --line:#2c5c4c; --pad:#e6c36a;
+  --mono:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: light){
+  :root{--board:#f4f2ea; --panel:#e9e6da; --silk:#13281f; --silk-dim:#4a5d54;
+        --copper:#9a5a1f; --line:#c9c5b4; --pad:#b8862c;}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{background:var(--board);color:var(--silk);font-family:var(--sans);font-size:1.02rem;line-height:1.65}
+a{color:var(--copper)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--pad);outline-offset:3px;border-radius:3px}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:5;background:var(--board);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;gap:18px;align-items:center;justify-content:space-between;min-height:52px;flex-wrap:wrap}
+.bar strong{font-family:var(--mono);font-size:.95rem}
+.bar nav{display:flex;gap:18px;flex-wrap:wrap}
+.bar nav a{color:var(--silk-dim);text-decoration:none;font-size:.92rem}
+.bar nav a:hover{color:var(--silk);text-decoration:underline}
+
+/* hero */
+.hero{padding:64px 0 36px}
+.hero h1{font-family:var(--mono);font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.1;letter-spacing:-.02em}
+.hero .lead{margin-top:18px;font-size:clamp(1.1rem,2.4vw,1.35rem);max-width:34em}
+.hero .open{margin-top:14px;color:var(--silk-dim);max-width:38em}
+.traces{display:block;width:100%;max-width:640px;height:auto;margin-top:34px}
+.traces path{fill:none;stroke:var(--copper);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.traces circle{fill:var(--pad)}
+.traces .t{stroke-dasharray:1;stroke-dashoffset:0}
+@media (prefers-reduced-motion: no-preference){
+  .traces .t{stroke-dashoffset:1;animation:draw 1.6s ease-out .2s forwards}
+  .traces .t:nth-of-type(2){animation-delay:.5s}
+  .traces .t:nth-of-type(3){animation-delay:.8s}
+  .traces circle{opacity:0;animation:pad .3s ease-out 1.7s forwards}
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pad{to{opacity:1}}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.links a{display:inline-block;padding:9px 18px;border:2px solid var(--copper);border-radius:4px;color:var(--silk);text-decoration:none;font-weight:600;font-size:.96rem}
+.links a:first-child{background:var(--copper);color:var(--board)}
+.links a:hover{background:var(--copper);color:var(--board)}
+
+/* sections: a thin trace runs down the left, with a pad at each heading */
+main{border-left:2px solid var(--line);margin-left:6px;padding-left:26px}
+section{padding:34px 0 8px}
+h2{font-family:var(--mono);font-size:1.45rem;position:relative;margin-bottom:16px}
+h2::before{content:"";position:absolute;left:-36px;top:.45em;width:14px;height:14px;border-radius:50%;background:var(--pad);border:3px solid var(--board)}
+h3{font-size:1.15rem;margin-bottom:4px}
+p+p{margin-top:12px}
+.muted{color:var(--silk-dim)}
+ul.plain{margin:10px 0 0 20px}
+ul.plain li{margin:6px 0}
+
+/* skills */
+dl.skills{display:grid;grid-template-columns:minmax(150px,200px) 1fr;gap:12px 22px}
+dl.skills dt{font-weight:700}
+dl.skills dd{color:var(--silk-dim)}
+@media (max-width:640px){dl.skills{grid-template-columns:1fr;gap:2px}dl.skills dd{margin-bottom:12px}}
+
+/* projects */
+.project{margin-top:22px;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.project.featured{border-left:5px solid var(--copper)}
+.project figure{margin:14px 0}
+.project img{display:block;max-width:100%;height:auto;border-radius:3px;border:1px solid var(--line)}
+.project.featured img{max-height:520px;margin:0 auto;object-fit:contain;background:#fff}
+.project figcaption{font-size:.88rem;color:var(--silk-dim);margin-top:6px}
+.result{margin-top:10px;font-weight:600}
+.stack{font-family:var(--mono);font-size:.84rem;color:var(--silk-dim);margin-top:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+.two .project{margin-top:0}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.repo{display:inline-block;margin-top:12px;font-weight:600}
+
+footer{padding:40px 0 50px;color:var(--silk-dim);font-size:.9rem;border-top:1px solid var(--line);margin-top:40px}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <strong>bibi zainab</strong>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Internship</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero" aria-labelledby="top">
+    <h1 id="top">Bibi Zainab</h1>
+    <p class="lead">ECE graduate who designs PCBs in KiCad, builds Arduino-based embedded systems, and writes Python tools for machine learning and cybersecurity.</p>
+    <p class="open">I am looking for an entry-level role in PCB design, embedded systems or electronics hardware.</p>
+
+    <svg class="traces" viewBox="0 0 640 150" role="img" aria-label="Decorative copper circuit traces ending in solder pads" aria-hidden="true">
+      <path class="t" pathLength="1" d="M0 30 H210 L240 60 H520"/>
+      <path class="t" pathLength="1" d="M0 75 H150 L180 45 H340 L387 92 H520"/>
+      <path class="t" pathLength="1" d="M0 120 H260 L290 90 H430 L460 120 H520"/>
+      <circle cx="528" cy="60" r="8"/><circle cx="528" cy="92" r="8"/><circle cx="528" cy="120" r="8"/>
+    </svg>
+
+    <div class="links">
+      <a href="bibi_zainab_cv.pdf" target="_blank" rel="noopener">Download resume</a>
+      <a href="https://github.com/zk946190-ui" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/bibi-zainab-dhalayat-929b2b41a" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:zk946190@gmail.com">Email me</a>
+    </div>
+  </section>
+
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p>I finished my B.E. in Electronics and Communication Engineering in 2026. My project work centres on embedded hardware: wiring sensors and actuators to an Arduino, writing the firmware in Embedded C/C++, and connecting it to the outside world over GSM and Bluetooth.</p>
+      <p>I trained in KiCad for schematic capture and PCB layout, and I am learning Verilog and RTL basics. I also completed a cybersecurity internship and built two Python machine-learning projects, so I can work on the software side of a hardware product too.</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <article class="project featured">
+        <h3>Reverse Vending Machine</h3>
+        <p class="stack">Arduino Mega, Embedded C/C++, HX711 load cell, inductive sensor, GSM 4G module, HC-05 Bluetooth</p>
+        <figure>
+          <img src="rvm_front.jpg" alt="Front panel of the Reverse Vending Machine prototype with LCD and keypad" loading="lazy" onerror="this.closest('figure').hidden=true">
+          <figcaption>The finished prototype, built by a team of four.</figcaption>
+        </figure>
+        <p>A campus recycling machine that sorts plastic, metal and glass bottles and rewards each student with points. The student logs in with their USN on a keypad, the machine classifies the bottle, and an SMS confirms the points.</p>
+        <ul class="plain">
+          <li>Metal bottles are found with an inductive sensor. Plastic and glass are separated by weight using a load cell and HX711.</li>
+          <li>Two servo motors drop the bottle and swing a flap to the right bin.</li>
+          <li>Users and points are stored in the Arduino EEPROM and managed from a phone over Bluetooth (ADD USER, DELETE USER, LIST).</li>
+          <li>A GSM module sends an SMS after every deposit and a "system full" alert when the bins are full.</li>
+        </ul>
+        <p class="result">Tested with 50 bottles per type: plastic 90%, metal 100%, glass 80% sorted correctly.</p>
+        <a class="repo" href="https://github.com/zk946190-ui/reverse-vending-machine" target="_blank" rel="noopener">View code on GitHub</a>
+      </article>
+
+      <div class="two">
+        <article class="project">
+          <h3>Skin Cancer Detection using CNN</h3>
+          <p class="stack">Python, TensorFlow/Keras, EfficientNetB7</p>
+          <figure>
+            <img src="skin_cancer_curves.png" alt="Training and validation loss and accuracy curves for the EfficientNetB7 model" loading="lazy" onerror="this.closest('figure').hidden=true">
+          </figure>
+          <p>Classifies skin lesion images as benign or malignant. A CNN built from scratch reached only 45.5% test accuracy, so I switched to transfer learning with EfficientNetB7.</p>
+          <p class="result">83.3% test accuracy.</p>
+          <a class="repo" href="https://github.com/zk946190-ui/skin-cancer-detection-cnn" target="_blank" rel="noopener">View code on GitHub</a>
+        </article>
+
+        <article class="project">
+          <h3>AI-Based Phishing URL Detection</h3>
+          <p class="stack">Python, Scikit-learn, TF-IDF, Random Forest, Flask</p>
+          <figure>
+            <img src="phishing_dashboard.png" alt="Flask dashboard that shows whether an entered URL is safe or phishing" loading="lazy" onerror="this.closest('figure').hidden=true">
+          </figure>
+          <p>Classifies a URL as safe or phishing and shows the answer on a Flask web dashboard. Precision on phishing URLs is 0.92, but recall is 0.56, so improving recall is my next step.</p>
+          <p class="result">78.1% accuracy on 498 test URLs.</p>
+          <a class="repo" href="https://github.com/zk946190-ui/phishing-url-detection" target="_blank" rel="noopener">View code on GitHub</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Internship</h2>
+      <h3>Cybersecurity Intern, GTTC Hubli</h3>
+      <p class="muted">16 weeks, academic year 2025-2026</p>
+      <ul class="plain">
+        <li>Studied networking fundamentals: IP addressing, subnet masks, ports, protocols and the OSI model.</li>
+        <li>Set up Kali Linux, Windows Server and Ubuntu in VMware, and managed users, groups and organizational units in Active Directory.</li>
+        <li>Launched cloud servers on AWS EC2, and configured Apache and Nginx for website hosting, reverse proxy and load balancing.</li>
+        <li>Practised PowerShell and Bash scripting for automation.</li>
+        <li>Finished with a project: the phishing URL detection system above.</li>
+      </ul>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>PCB design</dt><dd>KiCad, schematic capture, PCB layout fundamentals</dd>
+        <dt>Embedded systems</dt><dd>Arduino Mega, Embedded C/C++, load cell with HX711, inductive sensor, servo motor, I2C LCD, keypad, GSM and Bluetooth (UART), EEPROM</dd>
+        <dt>VLSI basics</dt><dd>Verilog HDL basics, RTL concepts, introductory FPGA and ASIC concepts</dd>
+        <dt>Python and ML</dt><dd>Python, TensorFlow/Keras, Scikit-learn, Pandas, NumPy, Flask</dd>
+        <dt>Networking and IT</dt><dd>TCP/IP, DNS, subnetting, Kali Linux, VMware, Windows Server, Active Directory, AWS EC2, Apache, Nginx, PowerShell, Bash</dd>
+        <dt>Tools</dt><dd>Git and GitHub, Linux, Arduino IDE, VS Code</dd>
+      </dl>
+    </section>
+
+    <section id="education">
+      <h2>Education and training</h2>
+      <h3>B.E. in Electronics and Communication Engineering, 2022-2026</h3>
+      <p>Government Engineering College, Talakal, Koppal (Visvesvaraya Technological University, Belagavi)<br>CGPA 7.95 / 10</p>
+      <ul class="plain">
+        <li>PCB design training in KiCad: schematic capture and PCB layout fundamentals</li>
+        <li>Cisco learning certificates in Cybersecurity and Ethical Hacking</li>
+        <li>Cybersecurity internship completion certificate, GTTC Hubli</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>The fastest way to reach me is email.</p>
+      <ul class="plain">
+        <li>Email: <a href="mailto:zk946190@gmail.com">zk946190@gmail.com</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/bibi-zainab-dhalayat-929b2b41a" target="_blank" rel="noopener">Bibi Zainab</a></li>
+        <li>GitHub: <a href="https://github.com/zk946190-ui" target="_blank" rel="noopener">zk946190-ui</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>&copy; 2026 Bibi Zainab</footer>
+</div>
+
+</body>
+</html>
